@@ -1,0 +1,72 @@
+<?php
+$url = Mage::getBaseUrl("js");
+?>
+
+<!-- Core CSS file -->
+<link rel="stylesheet" href="<?php echo $url?>path/photoswipe.css">
+<link rel="stylesheet" href="<?php echo $url?>path/default-skin/default-skin.css">
+<script src="<?php echo $url?>path/photoswipe.min.js"></script>
+<script src="<?php echo $url?>path/photoswipe-ui-default.min.js"></script>
+<h3>Product Gallery</h3>
+<div id="demo-test-gallery" class="demo-gallery">
+  <?php
+
+$_productCollection = Mage::getResourceModel('reports/product_collection')
+                    ->addAttributeToSelect('*')
+                    ->setVisibility(array(2,3,4))                   
+                    ->setOrder('created_at', 'desc')
+                    ->setPage(1, 10);
+					
+$size =  sizeof($_productCollection);
+if($size < 0) echo "<h6>No Product found</h6>";					
+?>
+  <?php foreach($_productCollection as $_product) : ?>
+  <a href="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(1600,1600);?>" data-size="1600x1600" data-med="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(1024,1024);?>" data-med-size="1024x1024" data-author="Folkert Gorter" class="demo-gallery__img--main"> <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(240,240);?>" alt="" />
+  <figure><?php echo $_product->getName()?></figure>
+  </a>
+  <?php endforeach; ?>
+</div>
+<!-- <figure class="demo-gallery__title">Demo gallery &middot; 5 photos</figure> -->
+</div>
+</div>
+<div id="gallery" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="pswp__bg"></div>
+<div class="pswp__scroll-wrap">
+<div class="pswp__container">
+  <div class="pswp__item"></div>
+  <div class="pswp__item"></div>
+  <div class="pswp__item"></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+  <div class="pswp__top-bar">
+    <div class="pswp__counter"></div>
+    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+    <button class="pswp__button pswp__button--share" title="Share"></button>
+    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+    <div class="pswp__preloader">
+      <div class="pswp__preloader__icn">
+        <div class="pswp__preloader__cut">
+          <div class="pswp__preloader__donut"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- <div class="pswp__loading-indicator"><div class="pswp__loading-indicator__line"></div></div> -->
+  
+  <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+    <div class="pswp__share-tooltip"> 
+      <!-- <a href="#" class="pswp__share--facebook"></a>
+					<a href="#" class="pswp__share--twitter"></a>
+					<a href="#" class="pswp__share--pinterest"></a>
+					<a href="#" download class="pswp__share--download"></a> --> 
+    </div>
+  </div>
+  <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+  <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+  <div class="pswp__caption">
+    <div class="pswp__caption__center"> </div>
+  </div>
+</div>
+<script src="<?php echo $url?>path/script.js"></script> 

@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<config>
+  <modules>
+    <MyCompany_ProductGallery>
+      <version>0.0.1</version>
+    </MyCompany_ProductGallery>
+  </modules>
+  <frontend>
+    <routers>
+      <productgallery>
+        <use>standard</use>
+        <args>
+          <module>MyCompany_ProductGallery</module>
+          <frontName>productgallery</frontName>
+        </args>
+      </productgallery>
+    </routers>
+    
+    <!-- This node contains module layout configuration -->
+    <layout>
+      <updates>
+        <!-- module alias -->
+        <productgallery>
+          <!-- File for loading -->
+          <file>productgallery.xml</file>
+        </productgallery>
+      </updates>
+    </layout>
+  </frontend>
+</config>
